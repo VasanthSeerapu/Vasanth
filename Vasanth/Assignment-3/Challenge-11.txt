@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <stdlib.h>
+int main()
+{
+    FILE *fp;
+    char text[200];
+    fp = fopen("data.txt", "w"); 
+    if (fp == NULL)
+    {
+        printf("Error: Could not open file for writing.\n");
+        exit(1);
+    }
+    printf("Enter text to write to file: ");
+    scanf(" %[^\n]", text);
+    fprintf(fp, "%s\n", text); 
+    fclose(fp);
+    printf("Text written successfully!\n");
+    fp = fopen("data.txt", "r");
+    if (fp == NULL)
+    {
+        printf("Error: Could not open file for reading.\n");
+        exit(1);
+    }
+    printf("\nContents of the file:\n");
+    while (fscanf(fp, " %[^\n]", text) != EOF)
+    {
+        printf("%s\n", text);
+    }
+    fclose(fp);
+    fp = fopen("data.txt", "a");
+    if (fp == NULL)
+    {
+        printf("Error: Could not open file for appending.\n");
+        exit(1);
+    }
+    printf("\nEnter text to append to file: ");
+    scanf(" %[^\n]", text);
+    fprintf(fp, "%s\n", text);
+    fclose(fp);
+    printf("Text appended successfully!\n");
+    return 0;
+}
